@@ -1,0 +1,15 @@
+[package]
+name    = "baseus-transport"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+thiserror = { workspace = true }
+tokio     = { workspace = true }
+tracing   = { workspace = true }
+btleplug  = "0.11"
+futures   = "0.3"
+uuid      = { version = "1", features = ["v4"] }
+
+[dev-dependencies]
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }
