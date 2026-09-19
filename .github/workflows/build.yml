@@ -25,7 +25,7 @@ jobs:
         uses: dtolnay/rust-toolchain@stable
 
       - name: Install dependencies
-        working-directory: baseus-desktop-0.2.1
+        working-directory: baseus-desktop-0.2.1/apps/baseus-app
         run: pnpm install
 
       - name: Build Tauri app
