@@ -38,4 +38,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: baseus-app-windows
-          path: baseus-desktop-0.2.1/apps/baseus-app/src-tauri/target/release/*.exe
+          path: baseus-desktop-0.2.1/**/*.exe
+          if-no-files-found: error
