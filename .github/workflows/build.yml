@@ -1,0 +1,41 @@
+name: Build App
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install dependencies
+        working-directory: baseus-desktop-0.2.1
+        run: pnpm install
+
+      - name: Build Tauri app
+        working-directory: baseus-desktop-0.2.1/apps/baseus-app
+        run: pnpm tauri build
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: baseus-app-windows
+          path: |
+            baseus-desktop-0.2.1/apps/baseus-app/src-tauri/target/release/*.exe
+            baseus-desktop-0.2.1/apps/baseus-app/src-tauri/target/release/bundle/nsis/*.exe
